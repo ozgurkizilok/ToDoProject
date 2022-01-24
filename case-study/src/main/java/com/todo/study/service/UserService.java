@@ -1,13 +1,11 @@
 package com.todo.study.service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todo.study.dto.UserDto;
-import com.todo.study.model.ToDo;
 import com.todo.study.model.User;
 import com.todo.study.repository.UserRepository;
 
@@ -32,12 +30,7 @@ public class UserService {
 	}
 
 	public void deleteUser(String userId) {
-		List<ToDo> todoList = toDoService.findAllByUserId(userId);  //kullanıcının birden fazla listesi olabilir.
-		if(todoList.size()>0) {
-			for(int i=0; i<todoList.size(); i++) {
-				toDoService.deleteTodo(todoList.get(i).getId(),userId);
-			}
-		}
+		toDoService.deleteByUserId(userId);
 		User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException());
 		userRepository.delete(user);
 	}

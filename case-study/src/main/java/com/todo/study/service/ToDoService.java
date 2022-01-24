@@ -1,6 +1,5 @@
 package com.todo.study.service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +42,9 @@ public class ToDoService {
 		}
 	}
 
-	public List<ToDo> findAllByUserId(String userId) {
-		return todoRepository.findAllByUserId(userId);
+	
+	public void deleteByUserId(String userId) {
+		todoRepository.deleteByUserId(userId);
 	}
 
 }
